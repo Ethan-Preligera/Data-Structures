@@ -1,8 +1,112 @@
 public class Playlist {
     public static void main(String[] args) {
-        MyPlayList myPlayList = new MyPlayList();
+        PlayList myPlayList = new MyPlayList();
 
-        
+        Song s1 = new Song("Gravity", "Hazbin Hotel", "Jessica Vosk");
+        Song s2 = new Song("Centuries", "American Beauty", "Patrick Stump");
+        Song s3 = new Song("Your Idol", "Kpop Demon Hunters", "Andrew Choi");
 
+        myPlayList.addToFront(S1);
+        myPlayList.addToEnd(S2);
+        myPlayList.addToEnd(S3);
+
+        myPlaylist.playAll();
+
+        System.out.println("Playlist size: " + myPlayList.size());
+
+        myPlaylist.removeSong("Centuries");
+
+        System.out.println("\nAfter removing Centuries: \n");
+
+        myPlaylist.playAll();
+    }
+
+    private SongNode head;
+
+    public void adToFront(Song s){
+        SongNode newNode = new SongNode(s);
+
+        newNodenext = head;
+    }
+
+    public void addToEnd(Song s){ 
+        SongNode newNode = new SongNode(s);
+
+        if(head == null) {
+            head = newNode;
+            return;
+        }
+
+        SongNode current = head;
+
+        while(current.next != null){
+
+            current = current.next;
+        }
+        current.next = newNode;
+    }
+
+    public Song removeFirst(){
+
+        if(head == null){
+            return null;
+        }
+
+        Song removeSong = head.data;
+        head = head.next;
+
+        return removedSong;
+    }
+
+    public void playAll(){
+
+        SongNode current = head;
+
+        while(current != null){
+            System.out.println(current data);
+            System.out.println("----------");
+
+            current = current.next;
+        }
+    }
+
+    public int size(){
+
+        int count = 0;
+        SongNode current = head;
+
+        while(current != null){
+            count++;
+            current = current.next;
+        }
+        return count;
+    }
+
+    public Song removeSong(String title){
+
+        if(head == null){
+            return null;
+        }
+        if(head.data.getTitle().equalsIgnorCase(title)){
+            Song removed = head.data;
+            head = head.next;
+            return removed;
+
+        }
+
+        SongNode current = head;
+
+        while (current.next != null){
+            if(current.next.data.getTitle().equalsIgnoreCase(title)){
+
+                Song removed = current.next.data;
+                
+                current.next = current.next.next;
+
+                return removed;
+            }
+            current = current.next;
+        }
+        return null;
     }
 }
