@@ -1,14 +1,13 @@
 public class SongNode {
+    
+    Song data;
+    SongNode next;
 
-    String title;
-    Node next;
-
-    public Node(String title){
+    public SongNode(Song data){
         //This should set this.data to the given value
         // and this.next to null
-        this.title = title;
+        this.data = data;
         this.next = null;
-    }
 
 }
 
