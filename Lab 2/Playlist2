@@ -1,7 +1,11 @@
 package Lab2
 
 public class Playlist2 {
+
+    private LinkedList<Songs>songs;
+
     public static void main(String[] args) {
+        
         PlayList2 myPlayList2 = new MyPlayList2();
 
         Song s1 = new Song("Gravity", "Hazbin Hotel", "Jessica Vosk");
@@ -14,101 +18,80 @@ public class Playlist2 {
 
         myPlaylist.playAll();
 
-        System.out.println("Playlist size: " + myPlayList.size());
+        System.out.println("\nPlaylist size: " + myPlayList.size());
+
+        System.out.println("\nSkipping Song: ");
+        myPlaylist.skip();
 
         myPlaylist.removeSong("Centuries");
 
         System.out.println("\nAfter removing Centuries: \n");
 
         myPlaylist.playAll();
+
+        System.out.println("\nNow Playing:");
+        System.out.println(myPlaylist.nowPlaying());        
     }
 
-    private SongNode head;
+   public void addToFront(Song s){
+        songs.addFirst(s);
 
-    public void adToFront(Song s){
-        SongNode newNode = new SongNode(s);
+        System.out.println("\nAdded to front:");
+        playAll();
+   }
 
-        newNodenext = head;
+   public void addToEnd(Song s){
+        songs.addLast(s);
+
+        System.out.println("\nAdded to end:");
+        playAll();
+   }
+
+   public Song nowPlaying(){
+        
+    if(songs.isEmpty()){
+        return null;
     }
+    return songs.peekFirst();
+   }
 
-    public void addToEnd(Song s){ 
-        SongNode newNode = new SongNode(s);
-
-        if(head == null) {
-            head = newNode;
-            return;
-        }
-
-        SongNode current = head;
-
-        while(current.next != null){
-
-            current = current.next;
-        }
-        current.next = newNode;
+   public Song skip(){
+        
+     if(songs.isEmpty()){
+        return null;
     }
+    return songs.removeFirst();
+   }
 
-    public Song removeFirst(){
-
-        if(head == null){
-            return null;
-        }
-
-        Song removeSong = head.data;
-        head = head.next;
-
-        return removedSong;
-    }
 
     public void playAll(){
 
         SongNode current = head;
 
-        while(current != null){
-            System.out.println(current data);
-            System.out.println("----------");
+       System.out.println("\nPlaylist:");
 
-            current = current.next;
+            for(Song song : songs){
+                System.out.println(song);
+                System.out.println("---------");
+            }
         }
-    }
+    
 
     public int size(){
-
-        int count = 0;
-        SongNode current = head;
-
-        while(current != null){
-            count++;
-            current = current.next;
-        }
-        return count;
+        return songs.size();
     }
 
     public Song removeSong(String title){
 
-        if(head == null){
-            return null;
-        }
-        if(head.data.getTitle().equalsIgnorCase(title)){
-            Song removed = head.data;
-            head = head.next;
-            return removed;
+        for(Song song : songs){
 
-        }
-
-        SongNode current = head;
-
-        while (current.next != null){
-            if(current.next.data.getTitle().equalsIgnoreCase(title)){
-
-                Song removed = current.next.data;
-                
-                current.next = current.next.next;
-
-                return removed;
+            if(song.getTitle().equalsIgnoreCase(title)){
+                songs.remove(song);
+                return song;
             }
-            current = current.next;
         }
+
         return null;
+
+        }
     }
-}
